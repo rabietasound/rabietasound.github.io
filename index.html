@@ -341,8 +341,8 @@ footer .links{display:flex;flex-direction:column;gap:8px;align-items:flex-end;co
         <div class="f full"><label for="b-msg">The vibe</label><textarea id="b-msg" name="msg" placeholder="Rooftop birthday, Latin house into disco, sunset start…"></textarea></div>
         <div class="send"><button type="submit">Send booking request</button><span class="err" id="err" role="alert"></span></div>
         <div class="done" id="done" hidden>
-          <h3>Request ready</h3>
-          <p>Direct booking email is being set up. For now, copy your request and send it to Rabieta on Instagram.</p>
+          <h3 id="doneTitle">Request sent</h3>
+          <p id="doneMsg">Thanks! Rabieta got your request and will reply to the contact you left. Here's a copy for your records.</p>
           <pre id="summary"></pre>
           <div class="row">
             <button type="button" class="btn solid" id="copyBtn">Copy request</button>
@@ -445,7 +445,22 @@ footer .links{display:flex;flex-direction:column;gap:8px;align-items:flex-end;co
     err.textContent = '';
     const dt = new Date(d.date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
     sum.textContent = `Hey Rabieta! Booking request:\n\nName: ${d.name}\nContact: ${d.contact}\nEvent: ${d.type}\nDate: ${dt}\nWhere: ${d.where || '—'}\nSet: ${d.hours}\nGuests: ${d.guests || '—'}\n\n${d.msg || ''}`.trim();
-    done.hidden = false; done.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' });
+    const btn = f.querySelector('.send button'); btn.disabled = true; btn.textContent = 'Sending…';
+    fetch('https://formsubmit.co/ajax/rickyastudillo711@gmail.com', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ _subject: 'New booking request: ' + d.type + ' on ' + dt, _template: 'table', _captcha: 'false',
+        Name: d.name, Contact: d.contact, Event: d.type, Date: dt, Where: d.where || '', Set: d.hours, Guests: d.guests || '', Vibe: d.msg || '' })
+    }).then(r => r.json()).then(j => {
+      if (!(j.success === true || j.success === 'true')) throw new Error(j.message || 'failed');
+      document.getElementById('doneTitle').textContent = 'Request sent';
+      document.getElementById('doneMsg').textContent = "Thanks! Rabieta got your request and will reply to the contact you left. Here's a copy for your records.";
+    }).catch(() => {
+      document.getElementById('doneTitle').textContent = 'Almost there';
+      document.getElementById('doneMsg').textContent = "We couldn't send it automatically. Copy your request and DM it to @rabietasound on Instagram.";
+    }).finally(() => {
+      btn.disabled = false; btn.textContent = 'Send booking request';
+      done.hidden = false; done.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' });
+    });
   });
   document.getElementById('copyBtn').addEventListener('click', e => {
     const b = e.currentTarget;
