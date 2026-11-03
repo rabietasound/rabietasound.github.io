@@ -446,12 +446,10 @@ footer .links{display:flex;flex-direction:column;gap:8px;align-items:flex-end;co
     const dt = new Date(d.date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
     sum.textContent = `Hey Rabieta! Booking request:\n\nName: ${d.name}\nContact: ${d.contact}\nEvent: ${d.type}\nDate: ${dt}\nWhere: ${d.where || '—'}\nSet: ${d.hours}\nGuests: ${d.guests || '—'}\n\n${d.msg || ''}`.trim();
     const btn = f.querySelector('.send button'); btn.disabled = true; btn.textContent = 'Sending…';
-    fetch('https://formsubmit.co/ajax/rickyastudillo711@gmail.com', {
-      method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({ _subject: 'New booking request: ' + d.type + ' on ' + dt, _template: 'table', _captcha: 'false',
-        Name: d.name, Contact: d.contact, Event: d.type, Date: dt, Where: d.where || '', Set: d.hours, Guests: d.guests || '', Vibe: d.msg || '' })
-    }).then(r => r.json()).then(j => {
-      if (!(j.success === true || j.success === 'true')) throw new Error(j.message || 'failed');
+    const fd = new FormData();
+    Object.entries({ _subject: 'New booking request: ' + d.type + ' on ' + dt, _template: 'table', _captcha: 'false',
+      Name: d.name, Contact: d.contact, Event: d.type, Date: dt, Where: d.where || '', Set: d.hours, Guests: d.guests || '', Vibe: d.msg || '' }).forEach(([k, v]) => fd.append(k, v));
+    fetch('https://formsubmit.co/ajax/rickyastudillo711@gmail.com', { method: 'POST', mode: 'no-cors', body: fd }).then(() => {
       document.getElementById('doneTitle').textContent = 'Request sent';
       document.getElementById('doneMsg').textContent = "Thanks! Rabieta got your request and will reply to the contact you left. Here's a copy for your records.";
     }).catch(() => {
