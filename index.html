@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta property="og:title" content="Rabieta Sound">
 <meta property="og:description" content="Miami DJ. Rowdy world sounds. Next gig, past sets and bookings.">
-<meta property="og:image" content="https://rabietasound.github.io/frames/f114.jpg">
+<meta property="og:image" content="https://rabietasound.github.io/f114.jpg">
 <meta name="theme-color" content="#0d0907">
 <title>Rabieta Sound</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -282,7 +282,7 @@ footer .links{display:flex;flex-direction:column;gap:8px;align-items:flex-end;co
         </div>
       </div>
       <figure class="photo" style="margin:0">
-        <img src="assets/ricky.jpg" alt="Ricky, as Rabieta, dancing in a dark bar with neon behind him" loading="lazy">
+        <img src="ricky.jpg" alt="Ricky, as Rabieta, dancing in a dark bar with neon behind him" loading="lazy">
         <span class="tag mono">Ricky Rabieta</span>
       </figure>
     </div>
@@ -293,11 +293,11 @@ footer .links{display:flex;flex-direction:column;gap:8px;align-items:flex-end;co
       <div class="kicker mono">The run so far</div>
       <h2 class="h2">Past sets</h2>
       <div class="wall" tabindex="0" aria-label="Flyers from past sets, scroll sideways">
-        <figure><img src="assets/yolanda-nov.jpg" alt="Rabieta at Yolanda Mezcaleria flyer, Friday November 21" loading="lazy"><figcaption class="mono"><b>Yolanda</b><span>Nov 21 '25</span></figcaption></figure>
-        <figure><img src="assets/yolanda-dec.jpg" alt="Rabieta at Yolanda flyer, Friday December 19" loading="lazy"><figcaption class="mono"><b>Yolanda</b><span>Dec 19 '25</span></figcaption></figure>
-        <figure><img src="assets/yolanda-jan.jpg" alt="Eveava and Rabieta Taco Omakase night at Yolanda, Wednesday January 21" loading="lazy"><figcaption class="mono"><b>Taco Omakase</b><span>Jan 21 '26</span></figcaption></figure>
-        <figure><img src="assets/yolanda-feb.jpg" alt="Rabieta live DJ set at Yolanda, Friday February 6" loading="lazy"><figcaption class="mono"><b>Yolanda Fridays</b><span>Feb 06 '26</span></figcaption></figure>
-        <figure><img src="assets/cinco.jpg" alt="Tacombi Cinco de Mayo fundraiser flyer" loading="lazy"><figcaption class="mono"><b>Tacombi</b><span>May 05 '26</span></figcaption></figure>
+        <figure><img src="yolanda-nov.jpg" alt="Rabieta at Yolanda Mezcaleria flyer, Friday November 21" loading="lazy"><figcaption class="mono"><b>Yolanda</b><span>Nov 21 '25</span></figcaption></figure>
+        <figure><img src="yolanda-dec.jpg" alt="Rabieta at Yolanda flyer, Friday December 19" loading="lazy"><figcaption class="mono"><b>Yolanda</b><span>Dec 19 '25</span></figcaption></figure>
+        <figure><img src="yolanda-jan.jpg" alt="Eveava and Rabieta Taco Omakase night at Yolanda, Wednesday January 21" loading="lazy"><figcaption class="mono"><b>Taco Omakase</b><span>Jan 21 '26</span></figcaption></figure>
+        <figure><img src="yolanda-feb.jpg" alt="Rabieta live DJ set at Yolanda, Friday February 6" loading="lazy"><figcaption class="mono"><b>Yolanda Fridays</b><span>Feb 06 '26</span></figcaption></figure>
+        <figure><img src="cinco.jpg" alt="Tacombi Cinco de Mayo fundraiser flyer" loading="lazy"><figcaption class="mono"><b>Tacombi</b><span>May 05 '26</span></figcaption></figure>
       </div>
       <ul class="log">
         <li><span class="when">2026 · 05 · 05</span><span class="where">Tacombi Brickell</span><span class="what">Cinco de Mayo fundraiser for the Tacombi Foundation</span></li>
@@ -368,7 +368,7 @@ footer .links{display:flex;flex-direction:column;gap:8px;align-items:flex-end;co
 (() => {
   const N = 114;
   const pad = n => String(n).padStart(3, '0');
-  const src = i => 'frames/f' + pad(i + 1) + '.jpg';
+  const src = i => 'f' + pad(i + 1) + '.jpg';
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const cv = document.getElementById('scrub'), ctx = cv.getContext('2d');
   const hero = document.getElementById('hero');
